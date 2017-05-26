@@ -1,0 +1,34 @@
+
+package test;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Configuration
+@DependsOn("TestClass")
+public class BeanConfig {
+ 
+   @Autowired
+   private somevalidationclass somevalidationclass;
+
+   @PostConstruct
+   public void checkEnum() {
+      Set<String> errorSet = new HashSet<String>();
+
+  for (somevalidationclass values : somevalidationclass.values()) {
+         ClassType classType = values.findByID(values.toDbValueCd());
+         if (classType == null) {
+            errorSet.add("Validationclass: ");
+         }
+      }
+
+      
+
+      if (!errorSet.isEmpty()) {
+         throw new ExceptionInInitializerError(
+               "*********************Could not initialize " + errorSet);
+
+      }
+
+   }
+}
